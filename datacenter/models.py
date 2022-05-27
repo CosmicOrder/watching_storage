@@ -1,4 +1,7 @@
+import datetime
+
 from django.db import models
+from django.utils.timezone import make_aware
 
 
 class Passcard(models.Model):
@@ -18,6 +21,14 @@ class Visit(models.Model):
     passcard = models.ForeignKey(Passcard, on_delete=models.CASCADE)
     entered_at = models.DateTimeField()
     leaved_at = models.DateTimeField(null=True)
+
+    def get_duration(self):
+        now = make_aware(datetime.datetime.now())
+        return now - self.entered_at
+
+    def format_duration(self, duration):
+        format_duration = ':'.join(str(duration).split(':')[:2])
+        return format_duration
 
     def __str__(self):
         return '{user} entered at {entered} {leaved}'.format(
