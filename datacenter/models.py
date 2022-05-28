@@ -23,10 +23,10 @@ class Visit(models.Model):
     leaved_at = models.DateTimeField(null=True)
 
     def get_duration(self):
-        if self.leaved_at is None:
-            return make_aware(datetime.datetime.now()) - self.entered_at
-        else:
+        if self.leaved_at:
             return self.leaved_at - self.entered_at
+        else:
+            return make_aware(datetime.datetime.now()) - self.entered_at
 
     def format_duration(self):
         format_duration = ':'.join(str(self.get_duration()).split(':')[:2])
