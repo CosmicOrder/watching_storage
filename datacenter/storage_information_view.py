@@ -4,13 +4,13 @@ from django.shortcuts import render
 
 
 def storage_information_view(request):
-    visitors = Visit.objects.filter(leaved_at=None)
+    current_visitors = Visit.objects.filter(leaved_at=None)
     non_closed_visits = []
-    for visitor in visitors:
-        who_entered = visitor.passcard.owner_name
-        entered_at = visitor.entered_at
-        duration = visitor.format_duration()
-        is_strange = visitor.is_visit_long()
+    for current_visitor in current_visitors:
+        who_entered = current_visitor.passcard.owner_name
+        entered_at = current_visitor.entered_at
+        duration = current_visitor.format_duration()
+        is_strange = current_visitor.is_visit_long()
         non_closed_visits.append({'who_entered': who_entered,
                                   'entered_at': entered_at,
                                   'duration': duration,
