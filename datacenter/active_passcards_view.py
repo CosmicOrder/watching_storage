@@ -8,6 +8,6 @@ def active_passcards_view(request):
 
     all_passcards = Passcard.objects.all()
     context = {
-        'active_passcards': active_passcards,  # люди с активными пропусками
+        'active_passcards': active_passcards,
     }
     return render(request, 'active_passcards.html', context)

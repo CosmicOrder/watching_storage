@@ -17,6 +17,6 @@ def storage_information_view(request):
                                   'is_strange': is_strange})
 
     context = {
-        'non_closed_visits': non_closed_visits,  # не закрытые посещения
+        'non_closed_visits': non_closed_visits,
     }
     return render(request, 'storage_information.html', context)
