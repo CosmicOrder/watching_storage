@@ -9,11 +9,12 @@ def storage_information_view(request):
     for visitor in visitors:
         who_entered = visitor.passcard.owner_name
         entered_at = visitor.entered_at
-        duration = visitor.get_duration()
-        format_duration = visitor.format_duration(duration)
+        duration = visitor.format_duration()
+        is_strange = visitor.is_visit_long()
         non_closed_visits.append({'who_entered': who_entered,
                                   'entered_at': entered_at,
-                                  'duration': format_duration})
+                                  'duration': duration,
+                                  'is_strange': is_strange})
 
     context = {
         'non_closed_visits': non_closed_visits,  # не закрытые посещения

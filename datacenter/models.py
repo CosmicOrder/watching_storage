@@ -23,12 +23,19 @@ class Visit(models.Model):
     leaved_at = models.DateTimeField(null=True)
 
     def get_duration(self):
-        now = make_aware(datetime.datetime.now())
-        return now - self.entered_at
+        if self.leaved_at is None:
+            return make_aware(datetime.datetime.now()) - self.entered_at
+        else:
+            return self.leaved_at - self.entered_at
 
-    def format_duration(self, duration):
-        format_duration = ':'.join(str(duration).split(':')[:2])
+    def format_duration(self):
+        format_duration = ':'.join(str(self.get_duration()).split(':')[:2])
         return format_duration
+
+    def is_visit_long(self, minutes=60):
+        duration = self.get_duration()
+        duration_in_minutes = duration.total_seconds() // 60
+        return True if duration_in_minutes >= minutes else False
 
     def __str__(self):
         return '{user} entered at {entered} {leaved}'.format(
