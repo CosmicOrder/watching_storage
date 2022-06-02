@@ -24,12 +24,24 @@
     pip install -r requirements.txt
 
 Задайте значения переменных окружения в файле .env, чтобы корректно 
-подключаться к базе данных и включать/выключать режим отладки сайта:  
+сконфигурировать Django-приложение:
 
-- Пример:
+- Схема DATABASE_URL:
+
+      postgres://USER:PASSWORD@HOST:PORT/NAME
+   
+- Секретный ключ:
 
       SECRET_KEY="SURPRISE_ME"
-   
+
+- Отладка вкл/выкл (по умолчанию выкл):
+
+      DEBUG="True_or_False"
+
+- Список хостов/доменов, для которых может работать текущий сайт:
+
+      ALLOWED_HOSTS=['server_domain_or_IP']
+
 Запустите сайт:
 
     python manage.py runserver
